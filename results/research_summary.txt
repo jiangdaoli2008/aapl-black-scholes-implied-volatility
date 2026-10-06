@@ -1,0 +1,215 @@
+AAPL Black-Scholes Implied Volatility Analysis
+Research Summary
+
+
+1. Research Question
+====================
+
+This project investigates the implied volatility structure of AAPL call options under the Black-Scholes framework.
+
+The main research question is:
+
+Does the constant volatility assumption of the Black-Scholes model
+adequately describe the observed market implied volatility pattern?
+
+
+2. Dataset
+==========
+
+Underlying asset:
+Apple Inc. (AAPL)
+
+Quote date:
+2020-12-31
+
+Expiration date:
+2021-02-19
+
+Option type:
+Call options
+
+Sample size:
+10 option contracts
+
+
+The research sample contains options with different strike prices
+but the same quote date and maturity.
+
+This design allows the analysis of the cross-sectional relationship
+between strike price and implied volatility.
+
+
+3. Methodology
+==============
+
+The project implements a European Black-Scholes call option model.
+
+Option prices are calculated using:
+
+- underlying price
+- strike price
+- time to maturity
+- risk-free interest rate
+- dividend yield
+- volatility parameter
+
+
+Because volatility is not directly observable,
+implied volatility is obtained by solving:
+
+Black-Scholes theoretical price = Market option price
+
+
+The numerical inversion is performed using Brent's root-finding method.
+
+
+4. Model Assumptions
+====================
+
+Risk-free rate:
+
+r = 0.001
+
+
+Dividend yield:
+
+q = 0.0
+
+
+Time to maturity:
+
+T = DTE / 365
+
+
+The model represents European-style call options.
+
+Listed AAPL options are generally American-style,
+therefore the calculated IV should be interpreted
+under the simplified Black-Scholes assumptions.
+
+
+5. Results
+==========
+
+All 10 option contracts successfully produced implied volatility values.
+
+
+Calculated implied volatility range:
+
+Minimum:
+38.35%
+
+Maximum:
+45.51%
+
+
+The implied volatility decreased from approximately:
+
+45.51% at strike price 110
+
+to:
+
+38.35% at strike price 140
+
+
+and increased again toward:
+
+40.67% at strike price 155.
+
+
+This produces a volatility smile pattern,
+showing that market prices do not follow
+the constant volatility assumption of the basic Black-Scholes model.
+
+
+6. Validation
+==============
+
+Each calculated implied volatility was substituted back into
+the Black-Scholes model.
+
+Validation results:
+
+Successful repricing:
+10 / 10
+
+
+Maximum absolute pricing error:
+
+0.0000000000
+
+
+Mean absolute pricing error:
+
+0.0000000000
+
+
+This confirms numerical consistency of the implied volatility solver.
+
+
+7. Comparison With Provided IV
+==============================
+
+The calculated implied volatility was compared with the
+C_IV field provided in the dataset.
+
+
+The largest difference was approximately:
+
+1.47 percentage points
+
+
+at strike price:
+
+110
+
+
+The difference decreased near at-the-money strikes.
+
+
+Possible explanations include:
+
+- different option pricing assumptions,
+- dividend treatment,
+- interest rate assumptions,
+- quote construction methodology,
+- American versus European option differences.
+
+
+8. Limitations
+==============
+
+This analysis has several limitations.
+
+
+First, the Black-Scholes model assumes European exercise,
+while listed AAPL options are American-style.
+
+
+Second, the analysis assumes zero dividend yield,
+although AAPL pays dividends.
+
+
+Third, the risk-free rate is simplified rather than matched
+exactly to the historical market environment.
+
+
+Finally, the conclusion is based on a single quote date
+and one maturity with 10 option contracts.
+
+The results should therefore be interpreted as
+a case study rather than a universal description
+of AAPL option markets.
+
+
+9. Future Extensions
+====================
+
+Possible improvements include:
+
+- incorporating historical dividend yields,
+- using maturity-matched Treasury rates,
+- comparing European and American option models,
+- analysing multiple expiration dates,
+- constructing a full volatility surface,
+- performing volatility parameter calibration.
