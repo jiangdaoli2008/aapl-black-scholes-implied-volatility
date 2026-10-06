@@ -14,6 +14,8 @@ __pycache__/
 # Temporary files
 *.log
 
-# Large datasets
-data/raw/
+# Ignore raw data, but keep the directory placeholder
+data/raw/*
+!data/raw/.gitkeep
+
 data/processed/AAPL_options_clean.csv
